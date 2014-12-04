@@ -24,6 +24,7 @@ import java.util.Map;
 
 import soot.G;
 import soot.Local;
+import soot.MethodOrMethodContext;
 import soot.PointsToAnalysis;
 import soot.Scene;
 import soot.SceneTransformer;
@@ -164,6 +165,9 @@ public class SparkTransformer extends SceneTransformer
         if( opts.verbose() ) {
             G.v().out.println( "[Spark] Number of reachable methods: "
                     +Scene.v().getReachableMethods().size() );
+            for (MethodOrMethodContext aMethod: Scene.v().getReachableMethods().set) {
+            	G.v().out.println( "spark reachable method - " + aMethod.method().getSignature());
+            }
         }
 
         if( opts.set_mass() ) findSetMass( pag );

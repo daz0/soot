@@ -59,6 +59,7 @@ import soot.jimple.spark.SparkTransformer;
 import soot.jimple.spark.fieldrw.FieldTagAggregator;
 import soot.jimple.spark.fieldrw.FieldTagger;
 import soot.jimple.toolkits.annotation.AvailExprTagger;
+import soot.jimple.toolkits.annotation.FuncParamChecker;
 import soot.jimple.toolkits.annotation.DominatorsTagger;
 import soot.jimple.toolkits.annotation.LineNumberAdder;
 import soot.jimple.toolkits.annotation.arraycheck.ArrayBoundsChecker;
@@ -277,6 +278,7 @@ public class PackManager {
             p.add(new Transform("jap.umt", new UnreachableMethodTransformer()));
             p.add(new Transform("jap.lit", LoopInvariantFinder.v()));
             p.add(new Transform("jap.aet", AvailExprTagger.v()));
+            p.add(new Transform("jap.zwfpc", FuncParamChecker.v()));
             p.add(new Transform("jap.dmt", DominatorsTagger.v()));
 
         }

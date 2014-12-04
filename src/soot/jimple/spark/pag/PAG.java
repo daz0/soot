@@ -246,6 +246,7 @@ public class PAG implements PointsToAnalysis {
         somethingMerged = false;
         if( opts.verbose() ) {
             G.v().out.println( "Done cleaning up graph for merged nodes" );
+            G.v().out.println( "Call graph at this point is - " + ofcg.callGraph().toString());
         }
     }
     public boolean doAddSimpleEdge( VarNode from, VarNode to ) {

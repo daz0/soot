@@ -395,6 +395,8 @@ public final class OnFlyCallGraphBuilder
         worklist = rm.listener();
         options = new CGOptions( PhaseOptions.v().getPhaseOptions("cg") );
         if( !options.verbose() ) {
+        	G.v().out.println( "The call graph is represented as - " + cicg.toString());
+        	G.v().out.println( "");
             G.v().out.println( "[Call Graph] For information on where the call graph may be incomplete, use the verbose option to the cg phase." );
         }
         
