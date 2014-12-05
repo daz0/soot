@@ -19,8 +19,10 @@
 
 package soot.jimple.toolkits.annotation;
 import soot.*;
+
 import java.util.*;
 import soot.toolkits.graph.*;
+import soot.util.Chain;
 import soot.jimple.*;
 import soot.options.*;
 import soot.jimple.toolkits.pointer.*;
@@ -38,7 +40,17 @@ public class FuncParamChecker extends BodyTransformer
     {
 
     	System.out.println("ZWB - Signature of current method" + b.getMethod().getSignature());
-    	System.out.println("ZWB - SubSignature of current method" + b.getMethod().getSubSignature());
+    	System.out.println("ZWB - SubSignature of current method: " + b.getMethod().getSubSignature());
+    	System.out.println(b.toString());
+    	
+    	Chain<Unit> units = b.getUnits();
+
+        for (Unit currentStmt : units) {
+        	Stmt stmt = (Stmt)currentStmt;
+        	if (stmt.containsInvokeExpr()) {
+        		System.out.println(stmt.toString());
+        	}
+        }
     	
     }
 }
