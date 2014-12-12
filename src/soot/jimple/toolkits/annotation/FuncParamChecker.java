@@ -47,8 +47,34 @@ public class FuncParamChecker extends BodyTransformer
 
         for (Unit currentStmt : units) {
         	Stmt stmt = (Stmt)currentStmt;
+        	
         	if (stmt.containsInvokeExpr()) {
         		System.out.println(stmt.toString());
+        		
+                InvokeExpr ie = stmt.getInvokeExpr();
+                SootMethod sMethod = ie.getMethod();
+                
+                SootClass sClass = sMethod.getDeclaringClass();
+                
+                // ZW - TBD: read from a config file, and tag each function as specified......
+                // These tags might be used later in pointer analysis and/or callgraph analysis
+                
+                if (sClass.getName().equals("android.content.Context")
+                		&& sMethod.getName().equals("registerReceiver"))
+                	System.out.println("ALERT: " + sClass.getName() + " -> " + sMethod.getName());
+                System.out.println("The signature is: " + sMethod.getSignature() + ", its Name is: "+ sMethod.getName());
+
+                if (sClass.getName().equals("android.content.Context")
+                		&& sMethod.getName().equals("sendBroadcast"))
+                	System.out.println("ALERT: " + sClass.getName() + " -> " + sMethod.getName());
+
+                for (ValueBox vbox: ie.getUseBoxes()) {
+                	System.out.println("ValueBox : " + vbox.toString());
+                }
+                for (Value val: ie.getArgs()) {
+                	System.out.println("Arg: " + val.toString() + ", Type is: " + val.getType());
+                }
+                	
         	}
         }
     	
